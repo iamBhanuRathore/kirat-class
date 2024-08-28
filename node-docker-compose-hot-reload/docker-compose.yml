@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: node_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - .:/usr/src/app
+      - exclude:/usr/src/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    command: "nodemon --inspect=0.0.0.0:9229 --nolazy index.js"
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/mydatabase
+    # command: npm run dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongo:
+    container_name: mongo_db
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+volumes:
+  mongo-data:
+  exclude:
