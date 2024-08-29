@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "./db";
 const app = express();
+
 app.use(express.json());
 app.post("/sum", async (req, res) => {
   const { a, b } = req.body as { a: number; b: number };
@@ -16,6 +17,7 @@ app.post("/sum", async (req, res) => {
     success: true,
     a: true,
     result,
+    data,
   });
 });
 
