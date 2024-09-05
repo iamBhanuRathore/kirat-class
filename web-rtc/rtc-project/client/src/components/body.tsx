@@ -49,7 +49,6 @@ const SingleComponent = () => {
         // pc.oniceconnectionstatechange = () => {
         //   console.log("ICE Connection State:", pc.iceConnectionState);
         // };
-
         // pc.onsignalingstatechange = () => {
         //   console.log("Signaling State:", pc.signalingState);
         // };

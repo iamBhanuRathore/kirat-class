@@ -1,4 +1,4 @@
-// define a counter
+// Defining a counter
 import { NextFunction, Request, Response } from "express";
 import { Counter } from "prom-client";
 
@@ -8,11 +8,13 @@ const requestCounter = new Counter({
   labelNames: ["method", "route", "status_code"],
 });
 
+// Middleware to count the number of requests
 export const requestCount = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  // Start time of the request
   const startTime = Date.now();
   res.on("finish", () => {
     const endTime = Date.now();
@@ -20,7 +22,7 @@ export const requestCount = (
     requestCounter.inc({
       method: req.method,
       route: req.path,
-      status_code: req.statusCode,
+      status_code: res.statusCode,
     });
   });
   next();
