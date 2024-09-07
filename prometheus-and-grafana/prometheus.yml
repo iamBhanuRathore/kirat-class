@@ -4,4 +4,5 @@ scrape_configs:
   - job_name: "nodejs-app"
     static_configs:
       - targets:
-          - localhost:3000
+          - node-app:3000 # Because in docker the container can recognize other container with their names
+          # - localhost:3000
