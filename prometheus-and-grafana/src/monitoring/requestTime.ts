@@ -17,7 +17,7 @@ export const requestTime = (
   next: NextFunction
 ) => {
   const startTime = Date.now();
-  res.on("finish", () => {
+  res.on("close", () => {
     const endTime = Date.now();
     const timeDiff = endTime - startTime;
     requestTimeHistogram.observe(

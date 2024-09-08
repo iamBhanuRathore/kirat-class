@@ -6,7 +6,14 @@ services:
       - "3000:3000"
     networks:
       - monitoring
-
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "6060:3000"
+    networks:
+      - monitoring
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # By default it is admin we don't need to put this env
   prometheus:
     image: prom/prometheus:latest
     volumes:

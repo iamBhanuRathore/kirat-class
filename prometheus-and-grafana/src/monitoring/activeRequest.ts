@@ -16,7 +16,7 @@ export const activeRequest = (
   next: NextFunction
 ) => {
   activeUserGuage.inc();
-  res.on("finish", () => {
+  res.on("close", () => {
     activeUserGuage.dec();
   });
   next();
