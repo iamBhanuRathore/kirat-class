@@ -10,7 +10,7 @@ app.use(requestCount);
 app.use(activeRequest);
 app.use(requestTime);
 app.get("/post", async (req, res) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   res.json({
     name: "bhanu",
   });
@@ -27,5 +27,5 @@ app.listen(3000, () => {
 });
 /*
     Command to run docker
-    - docker run -p 9090:9090 -v /prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+    - docker run -p 9090:9090 -v ./prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 */
