@@ -16,7 +16,7 @@ export const requestCount = (
 ) => {
   // Start time of the request
   const startTime = Date.now();
-  res.on("finish", () => {
+  res.on("close", () => {
     const endTime = Date.now();
     console.log(`Request took ${endTime - startTime}msS`);
     requestCounter.inc({
