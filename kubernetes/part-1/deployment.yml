@@ -1,0 +1,20 @@
+# yml file to create a deployment inside a kubernetes cluster
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec: # Specification of the Deployment
+  replicas: 3
+  selector: # Need To get the pods by the matchLabels
+    matchLabels:
+      app: nginx # Name of the pod - Which is used to Identify the pods which the deployment have to manage
+  template:
+    metadata:
+      labels:
+        app: nginx # This is the app-name which should match with deployment label so the deployment can find his pods - restarting, deleting, monitor
+    spec: # This is same specification which is used to create a pod
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
