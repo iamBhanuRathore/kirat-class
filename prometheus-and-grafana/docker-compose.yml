@@ -1,19 +1,13 @@
 version: "3.8"
+
 services:
   node-app:
-    build: .
+    build: ./
     ports:
       - "3000:3000"
     networks:
       - monitoring
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "6060:3000"
-    networks:
-      - monitoring
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin # By default it is admin we don't need to put this env
+
   prometheus:
     image: prom/prometheus:latest
     volumes:
@@ -22,5 +16,15 @@ services:
       - "9090:9090"
     networks:
       - monitoring
+
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   ports:
+  #     - "3001:3000"
+  #   networks:
+  #     - monitoring
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+
 networks:
   monitoring:

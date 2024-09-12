@@ -16,8 +16,25 @@ export const activeRequest = (
   next: NextFunction
 ) => {
   activeUserGuage.inc();
+  console.log("Increase" + req.path);
+  // Ensure we only decrement once, regardless of which event fires first
+  const decrementActiveUsers = () => {
+    console.log("Decrease" + req.path);
+    activeUserGuage.dec();
+  };
+
+  // Listen to either finish or close, but not both
+  //   res.on("finish", () => {
+  //     console.log("Decrease: ", req.path, "Finish");
+  //     activeUserGuage.dec();
+  //   });
   res.on("close", () => {
+    console.log("Decrease: ", req.path, "close");
     activeUserGuage.dec();
   });
+  //   res.on("error", () => {
+  //     console.log("Decrease: ", req.path, "error");
+  //     activeUserGuage.dec();
+  //   });
   next();
 };
