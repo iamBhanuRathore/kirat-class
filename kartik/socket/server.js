@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 connectDB();
-
+  
 app.use(express.json());
 io.on("connection", (socket) => {
   console.log("New client connected");
